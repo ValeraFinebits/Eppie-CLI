@@ -16,22 +16,40 @@
 //                                                                              //
 // ---------------------------------------------------------------------------- //
 
+using System.Globalization;
+
 using Serilog.Enrichers.Sensitive;
 
-namespace Eppie.CLI.Shared.Logging
+namespace Eppie.CLI.Logging
 {
+    /// <summary>
+    /// A generic masking operator that wraps existing masking operators and transforms
+    /// detected sensitive data into hash-based identifiers.
+    /// </summary>
+    /// <typeparam name="TBaseMaskingOperator">The base masking operator to wrap.</typeparam>
     public class HashTransformOperator<TBaseMaskingOperator> : IMaskingOperator
         where TBaseMaskingOperator : IMaskingOperator, new()
     {
         private TBaseMaskingOperator BaseOperator { get; } = new TBaseMaskingOperator();
 
+        /// <summary>
+        /// Masks the input string by detecting sensitive patterns and replacing them with hash-based identifiers.
+        /// </summary>
+        /// <param name="input">The input string to mask.</param>
+        /// <param name="mask">The mask parameter (not used in this implementation).</param>
+        /// <returns>A masking result containing the transformed string if a match was found.</returns>
         public MaskingResult Mask(string input, string mask)
         {
+            if (input == null)
+            {
+                throw new ArgumentNullException(nameof(input));
+            }
+
             MaskingResult result = BaseOperator.Mask(input, mask);
 
             if (result.Match)
             {
-                result.Result = string.Concat("#", input.GetHashCode().ToString());
+                result.Result = string.Concat("#", input.GetHashCode(StringComparison.Ordinal).ToString(CultureInfo.InvariantCulture));
             }
 
             return result;

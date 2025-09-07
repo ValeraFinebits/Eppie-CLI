@@ -153,6 +153,9 @@ namespace Eppie.CLI.Services
             private string? _askMessageBody;
             internal string AskMessageBody => _askMessageBody ??= _localizer.LoadString(GetStringResourceName());
 
+            private string? _authorizationCanceled;
+            internal string AuthorizationCanceled => _authorizationCanceled ??= _localizer.LoadString(GetStringResourceName());
+
             private string? _invalidPassword;
             internal string InvalidPassword => _invalidPassword ??= _localizer.LoadString(GetStringResourceName(category: "Warning"));
 

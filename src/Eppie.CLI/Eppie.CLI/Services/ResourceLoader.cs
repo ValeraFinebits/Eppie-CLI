@@ -156,6 +156,9 @@ namespace Eppie.CLI.Services
             private string? _authorizationCanceled;
             internal string AuthorizationCanceled => _authorizationCanceled ??= _localizer.LoadString(GetStringResourceName());
 
+            private string? _authorizationCompleted;
+            internal string AuthorizationCompleted => _authorizationCompleted ??= _localizer.LoadString(GetStringResourceName());
+
             private string? _invalidPassword;
             internal string InvalidPassword => _invalidPassword ??= _localizer.LoadString(GetStringResourceName(category: "Warning"));
 
@@ -351,11 +354,6 @@ namespace Eppie.CLI.Services
             internal string GetAuthorizationToServiceText(string serviceName)
             {
                 return _localizer.LoadFormattedString(GetStringResourceName(name: "AuthorizationToService"), serviceName);
-            }
-
-            internal string GetAuthorizationCompletedText()
-            {
-                return _localizer.LoadFormattedString(GetStringResourceName(name: "AuthorizationCompleted"));
             }
 
             private static string GetStringResourceName(string category = "Message", [CallerMemberName] string name = "")

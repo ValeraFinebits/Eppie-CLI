@@ -323,7 +323,7 @@ namespace Eppie.CLI.Services
         internal void WriteAuthorizationCompletedMessage()
         {
             _logger.LogDebug("Authorization completed successfully.");
-            Console.WriteLine(_resourceLoader.Strings.GetAuthorizationCompletedText());
+            Console.WriteLine(_resourceLoader.Strings.AuthorizationCompleted);
         }
 
         internal void WriteInvalidPasswordWarning()

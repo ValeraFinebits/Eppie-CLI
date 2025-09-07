@@ -320,10 +320,10 @@ namespace Eppie.CLI.Services
             Console.WriteLine(_resourceLoader.Strings.GetAuthorizationToServiceText(serviceName));
         }
 
-        internal void WriteAuthorizationCompletedMessage(string email)
+        internal void WriteAuthorizationCompletedMessage()
         {
             _logger.LogDebug("Authorization completed successfully.");
-            Console.WriteLine(_resourceLoader.Strings.GetAuthorizationCompletedText(email));
+            Console.WriteLine(_resourceLoader.Strings.GetAuthorizationCompletedText());
         }
 
         internal void WriteInvalidPasswordWarning()

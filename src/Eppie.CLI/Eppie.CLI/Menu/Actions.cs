@@ -405,7 +405,7 @@ namespace Eppie.CLI.Menu
 
                 if (!string.IsNullOrEmpty(email))
                 {
-                    _application.WriteAuthorizationCompletedMessage(email);
+                    _application.WriteAuthorizationCompletedMessage();
 
                     Account account = Account.Default;
                     account.Email = new EmailAddress(email);

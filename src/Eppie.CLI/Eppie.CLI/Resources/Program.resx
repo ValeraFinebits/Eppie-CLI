@@ -479,8 +479,7 @@
 {0} is a parameter containing the service name.</comment>
   </data>
   <data name="Message.AuthorizationCompleted" xml:space="preserve">
-    <value>Authorization of account '{0}' completed successfully.</value>
-    <comment>This message informs the user that authorization was completed successfully.
-{0} is a parameter containing the email address.</comment>
+    <value>Authorization completed successfully.</value>
+    <comment>This message informs the user that authorization was completed successfully.</comment>
   </data>
 </root>

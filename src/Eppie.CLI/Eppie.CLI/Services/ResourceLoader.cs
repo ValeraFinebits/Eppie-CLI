@@ -353,9 +353,9 @@ namespace Eppie.CLI.Services
                 return _localizer.LoadFormattedString(GetStringResourceName(name: "AuthorizationToService"), serviceName);
             }
 
-            internal string GetAuthorizationCompletedText(string email)
+            internal string GetAuthorizationCompletedText()
             {
-                return _localizer.LoadFormattedString(GetStringResourceName(name: "AuthorizationCompleted"), email);
+                return _localizer.LoadFormattedString(GetStringResourceName(name: "AuthorizationCompleted"));
             }
 
             private static string GetStringResourceName(string category = "Message", [CallerMemberName] string name = "")

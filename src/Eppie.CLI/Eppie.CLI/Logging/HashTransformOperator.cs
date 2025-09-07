@@ -40,7 +40,7 @@ namespace Eppie.CLI.Logging
         /// <returns>A masking result containing the transformed string if a match was found.</returns>
         public MaskingResult Mask(string input, string mask)
         {
-            if (input == null)
+            if (input is null)
             {
                 throw new ArgumentNullException(nameof(input));
             }

@@ -398,16 +398,14 @@ namespace Eppie.CLI.Menu
 
                 IAuthorizationClient authClient = _authProvider.CreateAuthorizationClient(mailServer);
 
-                //ToDo: Move string to resources
-                Console.WriteLine($"Authorization to {mailServer} service. Press Ctrl+C to cancel the operation.");
+                _application.WriteAuthorizationToServiceMessage(mailServer.ToString());
                 AuthCredential authCredential = await authClient.LoginAsync(cancellationLogin.Token).ConfigureAwait(false);
 
                 string? email = await ReadEmailAddressAsync(authClient, authCredential).ConfigureAwait(false);
 
                 if (!string.IsNullOrEmpty(email))
                 {
-                    //ToDo: Move string to resources
-                    Console.WriteLine($"Authorization of account '{email}' completed successfully.");
+                    _application.WriteAuthorizationCompletedMessage(email);
 
                     Account account = Account.Default;
                     account.Email = new EmailAddress(email);

@@ -473,4 +473,14 @@
     <comment>This is the text template for the default server address.
 {0} is a parameter containing the default server address.</comment>
   </data>
+  <data name="Message.AuthorizationToService" xml:space="preserve">
+    <value>Authorization to {0} service. Press Ctrl+C to cancel the operation.</value>
+    <comment>This message informs the user that authorization to a service is starting.
+{0} is a parameter containing the service name.</comment>
+  </data>
+  <data name="Message.AuthorizationCompleted" xml:space="preserve">
+    <value>Authorization of account '{0}' completed successfully.</value>
+    <comment>This message informs the user that authorization was completed successfully.
+{0} is a parameter containing the email address.</comment>
+  </data>
 </root>

@@ -348,6 +348,16 @@ namespace Eppie.CLI.Services
                 return _localizer.LoadFormattedString(GetStringResourceName(name: "AskOption"), defaultOption);
             }
 
+            internal string GetAuthorizationToServiceText(string serviceName)
+            {
+                return _localizer.LoadFormattedString(GetStringResourceName(name: "AuthorizationToService"), serviceName);
+            }
+
+            internal string GetAuthorizationCompletedText(string email)
+            {
+                return _localizer.LoadFormattedString(GetStringResourceName(name: "AuthorizationCompleted"), email);
+            }
+
             private static string GetStringResourceName(string category = "Message", [CallerMemberName] string name = "")
             {
                 return string.Join('.', [category, name]);

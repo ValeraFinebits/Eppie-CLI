@@ -322,7 +322,7 @@ namespace Eppie.CLI.Services
 
         internal void WriteAuthorizationCompletedMessage(string email)
         {
-            _logger.LogDebug("Authorization completed successfully for {Email}.", email);
+            _logger.LogDebug("Authorization completed successfully.");
             Console.WriteLine(_resourceLoader.Strings.GetAuthorizationCompletedText(email));
         }
 

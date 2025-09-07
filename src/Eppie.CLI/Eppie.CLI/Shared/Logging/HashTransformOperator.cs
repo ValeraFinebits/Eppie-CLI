@@ -18,7 +18,7 @@
 
 using Serilog.Enrichers.Sensitive;
 
-namespace Eppie.App.Shared.Logging
+namespace Eppie.CLI.Shared.Logging
 {
     public class HashTransformOperator<TBaseMaskingOperator> : IMaskingOperator
         where TBaseMaskingOperator : IMaskingOperator, new()

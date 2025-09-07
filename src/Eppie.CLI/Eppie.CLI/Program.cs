@@ -19,7 +19,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
-using Eppie.App.Shared.Logging;
+using Eppie.CLI.Shared.Logging;
 using Eppie.CLI.Menu;
 using Eppie.CLI.Options;
 using Eppie.CLI.Services;

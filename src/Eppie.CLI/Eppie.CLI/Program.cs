@@ -92,12 +92,14 @@ namespace Eppie.CLI
                 {
                     options.Mode = MaskingMode.Globally;
 
+#if DEBUG
                     options.MaskingOperators =
                     [
                         new HashTransformOperator<EmailAddressMaskingOperator>(),
                         new HashTransformOperator<IbanMaskingOperator>(),
                         new HashTransformOperator<CreditCardMaskingOperator>()
                     ];
+#endif
                 })
                 .WriteTo.Console(restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Fatal,
                                  formatProvider: CultureInfo.InvariantCulture)

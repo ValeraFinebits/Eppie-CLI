@@ -20,6 +20,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Collections.Generic;
 
+using Eppie.CLI.Logging;
 using Eppie.CLI.Menu;
 using Eppie.CLI.Options;
 using Eppie.CLI.Services;
@@ -88,6 +89,17 @@ namespace Eppie.CLI
         {
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Information()
+                .Enrich.WithSensitiveDataMasking(options =>
+                {
+                    options.Mode = MaskingMode.Globally;
+
+                    options.MaskingOperators =
+                    [
+                        new HashTransformOperator<EmailAddressMaskingOperator>(),
+                        new HashTransformOperator<IbanMaskingOperator>(),
+                        new HashTransformOperator<CreditCardMaskingOperator>()
+                    ];
+                })
                 .WriteTo.Console(restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Fatal,
                                  formatProvider: CultureInfo.InvariantCulture)
                 .WriteTo.Debug(formatProvider: CultureInfo.InvariantCulture)

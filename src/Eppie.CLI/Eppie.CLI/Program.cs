@@ -28,6 +28,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 using Serilog;
+#if DEBUG
+using Eppie.CLI.Logging;
+#endif
 
 namespace Eppie.CLI
 {
@@ -84,14 +87,24 @@ namespace Eppie.CLI
 
         private static void ConfigureDefaultLogger()
         {
-            Log.Logger = new LoggerConfiguration()
+            LoggerConfiguration loggerConfiguration = new LoggerConfiguration()
                 .MinimumLevel.Information()
                 .WriteTo.Console(restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Fatal,
                                  formatProvider: CultureInfo.InvariantCulture)
                 .WriteTo.Debug(formatProvider: CultureInfo.InvariantCulture)
                 .WriteTo.File(path: DefaultLogFilePath,
-                              formatProvider: CultureInfo.InvariantCulture)
-                .CreateLogger();
+                              formatProvider: CultureInfo.InvariantCulture);
+
+#if DEBUG
+            MaskingOptions options = new();
+            options.MaskingOperators.Add(new HashTransformOperator<EmailAddressMaskingOperator>());
+            options.MaskingOperators.Add(new HashTransformOperator<IbanMaskingOperator>());
+            options.MaskingOperators.Add(new HashTransformOperator<CreditCardMaskingOperator>());
+
+            loggerConfiguration = loggerConfiguration.Enrich.WithMasking(options);
+#endif
+
+            Log.Logger = loggerConfiguration.CreateLogger();
         }
     }
 }

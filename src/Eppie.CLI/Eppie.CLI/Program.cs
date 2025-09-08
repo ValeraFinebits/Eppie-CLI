@@ -18,6 +18,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Collections.Generic;
 
 using Eppie.CLI.Menu;
 using Eppie.CLI.Options;
@@ -28,6 +29,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 using Serilog;
+using Serilog.Enrichers.Sensitive;
 
 namespace Eppie.CLI
 {
@@ -91,6 +93,18 @@ namespace Eppie.CLI
                 .WriteTo.Debug(formatProvider: CultureInfo.InvariantCulture)
                 .WriteTo.File(path: DefaultLogFilePath,
                               formatProvider: CultureInfo.InvariantCulture)
+                .Enrich.WithSensitiveDataMasking(options =>
+                {
+                    options.Mode = MaskingMode.Globally;
+#if DEBUG
+                    options.MaskingOperators = new List<IMaskingOperator>
+                    {
+                        new HashTransformOperator<EmailAddressMaskingOperator>(),
+                        new HashTransformOperator<IbanMaskingOperator>(),
+                        new HashTransformOperator<CreditCardMaskingOperator>()
+                    };
+#endif
+                })
                 .CreateLogger();
         }
     }

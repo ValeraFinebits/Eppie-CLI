@@ -19,7 +19,9 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
+#if DEBUG
 using Eppie.CLI.Logging;
+#endif
 using Eppie.CLI.Menu;
 using Eppie.CLI.Options;
 using Eppie.CLI.Services;
